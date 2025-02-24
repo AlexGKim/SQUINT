@@ -1,4 +1,4 @@
-import squint
+import squint.tools
 import argparse
 
 def noise_flam():

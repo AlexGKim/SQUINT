@@ -13,7 +13,7 @@ setup(name='squint',
       ],
       entry_points = {
            'console_scripts': [
-               'squint-noise=squint.command_line:noise',
+               'squint-noise=squint.command_line:noise_flam',
                'squint-diffraction-limit=squint.command_line:diffraction_limit',
                ],
       },
