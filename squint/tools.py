@@ -5,6 +5,17 @@ import astropy
 import astropy.units as u
 import argparse
 
+'''
+    A type=float, help="Telescope area times throughput [m^2]"
+    D type=float, help="Mirror baseline [m^2]"
+    F_nu type=float, help="flux density [erg/s/cm^2/Hz]"
+    F_lambda type=float, help="flux density [erg/s/cm^2/A]"
+    lambda0 type=float, help="Wavelength [A]"
+    T_obs type=float, help="Exposure time [s]"
+    sigma_t type=float,  help="Detector jitter [ps]"
+
+'''
+
 def siginv_nu(A, F_nu, nu0, T_obs, sigma_t=5e-12):
 	ans = A * F_nu / astropy.constants.h.to(u.erg*u.s) / nu0 * numpy.sqrt(T_obs/sigma_t) * (128*numpy.pi)**(-0.25)
 	return ans.decompose()
@@ -18,6 +29,12 @@ def siginv_lam(A, F_lambda, lambda0, T_obs, sigma_t):
 	F_nu = F_lambda.to(u.erg / (u.s * u.cm**2 * u.Hz), u.spectral_density(lambda0))
 	nu0 = lambda0.to(u.Hz, u.spectral())
 	return siginv_nu(A, F_nu, nu0, T_obs, sigma_t)
+
+def diffraction_limit(lambda0, D):
+	lambda0 = lambda0 * u.AA
+	D = D * u.m
+	ans = 1.22*lambda0/D * u.rad
+	return ans.to(u.arcsec)
 
 # example usage
 # python noise.py 88 1e-13 5500 3600 5 
