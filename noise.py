@@ -19,6 +19,8 @@ def siginv_lam(A, F_lambda, lambda0, T_obs, sigma_t):
 	nu0 = lambda0.to(u.Hz, u.spectral())
 	return siginv_nu(A, F_nu, nu0, T_obs, sigma_t)
 
+# example usage
+# python noise.py 88 1e-13 5500 3600 5 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="A simple program with command-line arguments.")
