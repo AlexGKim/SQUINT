@@ -21,4 +21,4 @@ def diffraction_limit():
 
     args = parser.parse_args()
 
-    print(squint.tools.diffraction_limit(args.D, args.lambda0))
+    print(squint.tools.diffraction_limit(args.lambda0, args.D ))
